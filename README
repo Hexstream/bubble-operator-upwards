@@ -1,4 +1,4 @@
-Project's home: https://www.hexstreamsoft.com/projects/bubble-operator-upwards/
+Project's home: https://www.hexstreamsoft.com/libraries/bubble-operator-upwards/
 
 
 bubble-operator-upwards is a function that "bubbles an operator
@@ -7,89 +7,6 @@ cartesian product. This operation is notably useful for easy
 implementation of certain kinds of shorthand notations in macros. A
 cartesian-product function is also exported, as it's inherently needed
 to implement the main function.
-
-
-Examples
---------
-
-(bubble-operator-upwards 'and '(plate (and ham eggs) beans))
-=>
-(AND (PLATE HAM BEANS)
-     (PLATE EGGS BEANS))
-
-
-(bubble-operator-upwards 'alt '(section (alt 1 2 3) - (alt "a" "b"))
-                         :result-kind :branches)
-=>
-((SECTION 1 - "a") (SECTION 1 - "b")
- (SECTION 2 - "a") (SECTION 2 - "b")
- (SECTION 3 - "a") (SECTION 3 - "b"))
-
-
-(bubble-operator-upwards 'or '(>> (or ul ol)
-                                  (or (:class (or "important" "urgent"))
-                                      (id "first-priority"))))
-=>
-(OR (>> UL (:CLASS "important"))
-    (>> UL (:CLASS "urgent"))
-    (>> UL (ID "first-priority"))
-    (>> OL (:CLASS "important"))
-    (>> OL (:CLASS "urgent"))
-    (>> OL (ID "first-priority")))
-
-
-API
----
-
-First of all, in the way of packages there's the
-BUBBLE-OPERATOR-UPWARDS package, which is also nicknamed BUBBLE-OP-UP.
-It exports the functions BUBBLE-OPERATOR-UPWARDS and
-CARTESIAN-PRODUCT. Explicitly (:import-from) only those you need or
-explicitly package-qualify the symbols. Don't (:use)!
-
-
-Function BUBBLE-OPERATOR-UPWARDS operator form
-  &key (result-kind :abridged)
-       (if-collapsed nil)
-       (collapsed-identity (ecase result-kind
-                             ((:full :abridged)
-                              (list operator))
-                             (:branches nil)))
-
-  Bubbles OPERATOR upwards in FORM, demultiplexing all alternative
-  branches by way of cartesian product. Hard to describe formally, but
-  the examples above should give some inspiration for the basic
-  effect, and some experimentation in the REPL is recommended.
-
-  RESULT-KIND is one of :branches, :full or :abridged.
-
-  - :branches simply returns the demultiplexed branches.
-
-  - :full returns the same result as :branches would,
-    except wrapped in a cons whose CAR is OPERATOR.
-
-  - :abridged returns the same result as :full would,
-    except if there's only one branch, only that branch
-    is returned, without the wrapping.
-
-  IF-COLLAPSED and COLLAPSED-IDENTITY determine what to do if the
-  number of branches "collapses" to zero. IF-COLLAPSED is :error or
-  NIL. If it's NIL and the result is indeed collapsed, then the value
-  of COLLAPSED-IDENTITY will be returned.
-
-
-Function CARTESIAN-PRODUCT &rest possibility-groups
-
-Returns the cartesian-product of all possible combinations from
-POSSIBILITY-GROUPS, as a list.
-
-This function is inherently needed to implement
-BUBBLE-OPERATOR-UPWARDS, so might as well export it...
-
-(cartesian-product '(1 2) '(a b c))
-=>
-((1 A) (1 B) (1 C)
- (2 A) (2 B) (2 C))
 
 
 This library is in the Public Domain.
