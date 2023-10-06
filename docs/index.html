@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/tabs.css" />
     <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/tags.css" />
     <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/cl.css" />
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/cl-definitions.css" />
     <link rel="stylesheet" type="text/css" href="https://www.hexstreamsoft.com/libraries/libraries.css" />
     <link rel="preload" as="font" type="font/woff2" href="https://global.hexstream.dev/fonts/kaushan-script/KaushanScript-Regular.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="https://global.hexstream.dev/fonts/liberation/LiberationSerif-Regular.woff2" crossorigin />
@@ -50,7 +51,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2018-09-06">6 september 2018</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-10-06">6 october 2023</time><span>.</span></p>
 
     </nav>
 
@@ -113,33 +114,34 @@
 
       <nav class="tabs">
         <ul>
-          <li><a href="#examples">Examples</a></li>
-          <li><a href="#api">API</a></li>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#dictionary">Dictionary</a></li>
         </ul>
       </nav>
 
-      <section id="examples">
+      <section id="overview">
 
         <h1 class="breadcrumbs-bar">
           <span class="section-relative-nav">
-            <a href="#examples" class="anchor">⚓</a>
+            <a href="#overview" class="anchor">⚓</a>
           </span>
           <span class="breadcrumbs">
-            <a href="#">bubble-operator-upwards</a>
-            <span class="crumb"><span class="s"> » </span><a class="here">Examples</a></span>
+            <a class="here">Overview</a>
           </span>
         </h1>
 
+        <p>Here are a few examples:</p>
+
         <div class="scroll">
-          <pre class="example"><code class="common-lisp">(<code class="relevant">bubble-operator-upwards</code> 'and '(plate (and ham eggs) beans))
+          <pre class="example"><code class="common-lisp">(<code class="relevant"><a href="#dictionary_bubble-operator-upwards">bubble-operator-upwards</a></code> 'and '(plate (and ham eggs) beans))
 =&gt;
 (AND (PLATE HAM BEANS)
      (PLATE EGGS BEANS))</code></pre>
         </div>
 
         <div class="scroll">
-          <pre class="example"><code class="common-lisp">(<code class="relevant">bubble-operator-upwards</code> 'alt '(section (alt 1 2 3) - (alt "a" "b"))
-            :result-kind :branches)
+          <pre class="example"><code class="common-lisp">(<code class="relevant"><a href="#dictionary_bubble-operator-upwards">bubble-operator-upwards</a></code> 'alt '(section (alt 1 2 3) - (alt "a" "b"))
+                         :result-kind :branches)
 =&gt;
 ((SECTION 1 - "a") (SECTION 1 - "b")
  (SECTION 2 - "a") (SECTION 2 - "b")
@@ -147,7 +149,7 @@
         </div>
 
         <div class="scroll">
-          <pre class="example"><code class="common-lisp">(<code class="relevant">bubble-operator-upwards</code> 'or '(&gt;&gt; (or ul ol)
+          <pre class="example"><code class="common-lisp">(<code class="relevant"><a href="#dictionary_bubble-operator-upwards">bubble-operator-upwards</a></code> 'or '(&gt;&gt; (or ul ol)
                                   (or (:class (or "important" "urgent"))
                                       (id "first-priority"))))
 =&gt;
@@ -161,58 +163,158 @@
 
       </section>
 
-      <section id="api">
+      <section id="dictionary">
 
         <h1 class="breadcrumbs-bar">
           <span class="section-relative-nav">
-            <a href="#api" class="anchor">⚓</a>
+            <a href="#dictionary" class="anchor">⚓</a>
           </span>
           <span class="breadcrumbs">
-            <a href="#">bubble-operator-upwards</a>
-            <span class="crumb"><span class="s"> » </span><a class="here">API</a></span>
+            <a class="here">Dictionary</a>
           </span>
         </h1>
 
-        <p>First of all, in the way of packages there's the <code class="relevant">bubble-operator-upwards</code> package, which is also nicknamed <code class="relevant">bubble-op-up.</code> It exports the functions <code class="relevant">bubble-operator-upwards</code> and <code class="relevant">cartesian-product</code>. Explicitly <code class="common-lisp">(:import-from)</code> only those you need or explicitly package-qualify the symbols. Don't <code class="common-lisp">(:use)</code>!</p>
+        <nav class="tabs">
+          <ul>
+            <li><a href="#dictionary_bubble-operator-upwards"><span class="type">Package</span> <code>bubble-operator-upwards</code></a></li>
+          </ul>
+          <ul>
+            <li><a href="#dictionary_bubble-operator-upwards"><span class="type">Function</span> <code>bubble-operator-upwards</code></a></li>
+            <li><a href="#dictionary_cartesian-product"><span class="type">Function</span> <code>cartesian-product</code></a></li>
+          </ul>
+        </nav>
 
-        <dl>
-          <dt><pre>Function <dfn><code class="relevant">bubble-operator-upwards</code></dfn> <var>operator</var> <var>form</var>
-  &amp;key (<var>result-kind</var> <code class="relevant marker">:abridged</code>)
-       (<var>if-collapsed</var> <code class="relevant marker">nil</code>)
-       (<var>collapsed-identity</var> (ecase <var>result-kind</var>
-                             ((:full <code class="relevant marker">:abridged</code>)
-                              (list <var>operator</var>))
-                             (:branches <code class="relevant marker">nil</code>)))
-  =&gt; <var>result</var></pre></dt>
-          <dd>
+        <section id="dictionary_bubble-operator-upwards">
 
-            <p>Bubbles <var>operator</var> upwards in <var>form</var>, demultiplexing all alternative branches by way of cartesian product. Hard to describe formally, but the examples above should give some inspiration for the basic effect, and some experimentation in the <abbr title="Read-Eval-Print_Loop">REPL</abbr> is recommended.</p>
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_bubble-operator-upwards" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">bubble-operator-upwards</a></span>
+            </span>
+          </h1>
 
-            <p><var>result-kind</var> is one of <code class="relevant marker">:branches</code>, <code class="relevant marker">:full</code> or <code class="relevant marker">:abridged</code></p>
+          <article class="package definition">
 
-            <ul>
-              <li><p><dfn><code class="relevant marker">:branches</code></dfn> simply returns the demultiplexed branches.</p></li>
-              <li><p><dfn><code class="relevant marker">:full</code></dfn> returns the same <var>result</var> as <code class="relevant marker">:branches</code> would, except wrapped in a cons whose CAR is <var>operator</var>.</p></li>
-              <li><p><dfn><code class="relevant marker">:abridged</code></dfn> returns the same result as <code class="relevant marker">:full</code> would, except if there's only one branch, only that branch is returned, without the wrapping.</p></li>
-            </ul>
+            <h1><span class="type">Package</span> <span class="name self">bubble-operator-upwards</span></h1>
 
-            <p><var>if-collapsed</var> and <var>collapsed-identity</var> determine what to do if the number of branches "collapses" to zero. <var>if-collapsed</var> is <code class="relevant marker">:error</code> or <code class="relevant marker">nil</code>. If it's <code class="relevant marker">nil</code> and the result is indeed collapsed, then the value of <var>collapsed-identity</var> will be returned.</p>
-          </dd>
+            <section class="description">
+              <h1>Description</h1>
+              <p>This package is also nicknamed <code class="relevant">bubble-op-up</code>.</p>
+              <p>Simply <code>(:import-from #:bubble-operator-upwards #:<code class="relevant"><a href="#dictionary_bubble-operator-upwards">bubble-operator-upwards</a></code>)</code> from your <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
+            </section>
 
-          <dt><pre>Function <dfn><code class="relevant">cartesian-product</code></dfn> &amp;rest <var>possibility-groups</var>
-  =&gt; <var>cartesian-product</var></pre></dt>
+          </article>
 
-          <dd>
-            <p>Returns the cartesian-product of all possible combinations from <var>possibility-groups</var>, as a list. <small>This function is inherently needed to implement <code class="relevant">bubble-operator-upwards</code>, so might as well export it...</small></p>
+          <article class="function definition">
+
+            <h1><span class="type">Function</span> <span class="name self">bubble-operator-upwards</span></h1>
+
+            <p class="args-and-retvals"><var>operator</var> <var>form</var> &amp;key (<var>result-kind</var> :abridged) (<var>if-collapsed</var> nil) (<var>collapsed-identity</var> [...]) =&gt; <var>result</var></p>
+
+            <section class="arguments-and-values">
+              <h1>Arguments and Values</h1>
+              <ul>
+                <li><var>operator</var> -- A symbol.</li>
+                <li><var>form</var> -- A form.</li>
+                <li><var>result-kind</var> -- One of the keywords <code>:branches</code>, <code>:full</code> or <code>:abridged</code>.</li>
+                <li><var>if-collapsed</var> -- <code>:error</code> or <code>nil</code>.</li>
+                <li>
+                  <var>collapsed-identity</var> -- An object. The default is:
+                  <pre><code>
+(ecase <var>result-kind</var>
+  ((:full :abridged)
+   (list <var>operator</var>))
+  (:branches nil))</code></pre>
+                </li>
+              </ul>
+            </section>
+
+            <section class="description">
+
+              <h1>Description</h1>
+
+              <p>
+                Bubbles <var>operator</var> upwards in <var>form</var>, demultiplexing all alternative branches by way of cartesian product.
+                <br />
+                Hard to describe formally, but <a href="#overview">the examples above</a> should give some inspiration for the basic effect,
+                <br />
+                and some experimentation in the <abbr title="Read-Eval-Print-Loop">REPL</abbr> is recommended.
+              </p>
+
+              <p><var>result-kind</var> is one of <code>:branches</code>, <code>:full</code> or <code>:abridged</code>:</p>
+
+              <ul>
+                <li><dfn><code>:branches</code></dfn> simply returns the demultiplexed branches.</li>
+                <li><dfn><code>:full</code></dfn> returns the same <var>result</var> as <code>:branches</code> would, except wrapped in a cons whose CAR is <var>operator</var>.</li>
+                <li><dfn><code>:abridged</code></dfn> returns the same result as <code>:full</code> would, except if there's only one branch, only that branch is returned, without the wrapping.</li>
+              </ul>
+              <p>
+                <var>if-collapsed</var> and <var>collapsed-identity</var> determine what to do if the number of branches "collapses" to zero.
+                <br />
+                <var>if-collapsed</var> is <code>:error</code> or <code>nil</code>. If it's <code>nil</code> and the result is indeed collapsed, then the value of <var>collapsed-identity</var> will be returned.
+              </p>
+
+            </section>
+
+          </article>
+
+        </section>
+
+        <section id="dictionary_cartesian-product">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_cartesian-product" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">cartesian-product</a></span>
+            </span>
+          </h1>
+
+          <article class="function definition">
+
+            <h1><span class="type">Function</span> <span class="name self">bubble-op-up:cartesian-product</span></h1>
+
+            <p class="args-and-retvals">&amp;rest <var>possibility-groups</var> =&gt; <var>cartesian-product</var></p>
+
+            <section class="arguments-and-values">
+              <h1>Arguments and Values</h1>
+              <ul>
+                <li><var>possibility-groups</var> -- A list.</li>
+              </ul>
+            </section>
+
+            <section class="description">
+
+              <h1>Description</h1>
+
+              <p>
+                Returns the cartesian-product of all possible combinations from <var>possibility-groups</var>, as a list.
+                <br />
+                <small>This function is inherently needed to implement <code class="relevant"><a href="#dictionary_bubble-operator-upwards">bubble-operator-upwards</a></code>, so might as well export it...</small>
+              </p>
             <div class="scroll">
-              <pre class="example"><code class="common-lisp">(<code class="relevant">cartesian-product</code> '(1 2) '(a b c))
+              <pre class="example"><code class="common-lisp">(<code class="relevant"><a href="#dictionary_cartesian-product">bubble-op-up:cartesian-product</a></code> '(1 2) '(a b c))
 =&gt;
 ((1 A) (1 B) (1 C)
  (2 A) (2 B) (2 C))</code></pre>
             </div>
-          </dd>
 
-        </dl>
+            </section>
+
+          </article>
+
+        </section>
+
+        <nav class="end-of-section-indicator">
+          <a href="#dictionary">
+            "<span>Dictionary</span>" end.
+          </a>
+        </nav>
 
       </section>
 
